@@ -1,0 +1,8 @@
+<svg lang='ja' width='256' height='128' viewBox='0 0 256 128'
+     xmlns='http://www.w3.org/2000/svg' version='1.1'>
+    <rect width='256' height='128' ry='20' stroke='red'
+          fill='red' stroke-width='8'/>
+    <text text-anchor='middle' x='50%' y='50%' dy='.35em'
+          font-family='sans-serif' font-size='100px'
+          fill='white'>表記</text>
+</svg>
