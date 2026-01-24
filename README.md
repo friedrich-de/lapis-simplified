@@ -18,7 +18,7 @@ Note: These changes are now achievable with the original Lapis by changing the C
 Additionally the following changes are made for the sake of simplification:
 
 - Removed `ExpressionFurigana`: Expression and ExpressionReading are sufficient.
-- Removed `SentenceFurigana`: Furigana insertion is prone to mistakes and not needed. Make cards with native audio instead. Especially as a beginner you should never rely on any sort of furigana insertion. It's an simply an unsolved problem and not something that should be attempted automatically.
+- Removed `SentenceFurigana`: Furigana insertion is prone to mistakes and not needed. Make cards with native audio instead. Especially as a beginner you should never rely on any sort of furigana insertion. It's simply an unsolved problem and not something that should be attempted automatically.
 - Removed `IsWordAndSenteneCard` , `IsClickCard`, `IsSentenceCard` , `IsAudioCard`: These card types are not needed for a good workflow and clutter the card template unnecessarily.
 
 If you do want to use furigana insertion, consider using the original Lapis or another template that supports it.
