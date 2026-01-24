@@ -1,5 +1,7 @@
 # lapis-simplified
 
+https://github.com/user-attachments/assets/5bd7d122-79cc-4d9e-b4b8-426936b07102
+
 Fork of Lapis intended for modifications that align it with my personal preferences and the original, thoughtfully designed Animecards template. The idea is to split the card's information into two categories:
 
 - Essential: Word, Reading, Meaning
