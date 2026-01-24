@@ -24,15 +24,13 @@
         <div class="def-header">
             <div class="dh-vocab">
                 <div class="vocab">
-                    {{#ExpressionFurigana}}{{furigana:ExpressionFurigana}}{{/ExpressionFurigana}}
-                    {{^ExpressionFurigana}}{{Expression}}{{/ExpressionFurigana}}
+                    {{Expression}}
                 </div>
 
                 <!-- Reading + Pitch Accent -->
                 <div class="info">
                     <div class="pitch">
-                        {{#ExpressionFurigana}}{{kana:ExpressionFurigana}}{{/ExpressionFurigana}}
-                        {{^ExpressionFurigana}}{{ExpressionReading}}{{/ExpressionFurigana}}
+                        {{ExpressionReading}}
                     </div>
 
                     <!-- Pitch Accent -->
@@ -147,7 +145,7 @@
     }
 
     function handlePitches() {
-        let exprKana = `{{kana:ExpressionFurigana}}` || `{{ExpressionReading}}`;
+        let exprKana = `{{ExpressionReading}}`;
         const isYomitan = document.querySelector("#glossaries .yomitan-glossary");
         if (!exprKana) {
             // Check if Expression is a kana word

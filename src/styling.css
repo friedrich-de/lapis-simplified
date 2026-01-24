@@ -41,12 +41,12 @@
   See https://github.com/donkuri/lapis/tree/main/docs/user_settings.md */
   --main-picture-position: "right"; /* "right", "left", "alt" */
   --sentence-position: "above"; /* "above", "below" the definition box*/
-  --audio-buttons: "header"; /* "header", "fixed", "alt" */
+  --audio-buttons: "alt"; /* "header", "fixed", "alt" */
   --sentence-furigana: "hover"; /* "hover", "always", "off" */
   --nsfw-blur-contained: "off"; /* "on", "off" */
   --open-misc-info: "off"; /* "on", "off" */
   --glossary-separator: "off"; /* "on" to separate dictionaries in definition box */
-  --jitendex-format: "full"; /* "minimal" or space-separated list of "no-tags", "no-sentence", "no-forms", "no-xref", "no-img" */
+  --jitendex-format: "minimal"; /* "minimal" or space-separated list of "no-tags", "no-sentence", "no-forms", "no-xref", "no-img" */
   --img-ignore-display-scaling:  "off"; /* Modal images ignore display scaling */
 
   --mobile-main-picture-position: "right"; /* "left", "right", "alt" */
@@ -399,7 +399,7 @@ main {
 }
 
 .audio-buttons-alt {
-    font-size: 0;
+  font-size: 0;
 }
 
 /* Pitch */
@@ -416,6 +416,7 @@ main {
   vertical-align: top;
   padding: 1px 3px;
   margin-right: -5px;
+
   &:has(li) {
     display: inline-block;
   }
@@ -440,12 +441,12 @@ main {
   display: inline;
 }
 
-.pitch ul > li:not(:last-child)::after {
+.pitch ul>li:not(:last-child)::after {
   content: "・";
   color: var(--fg-color);
 }
 
-#pitch-tags ul > li:not(:last-child)::after {
+#pitch-tags ul>li:not(:last-child)::after {
   content: "・";
   color: var(--bg-color);
   font-size: 0.8em;
@@ -520,7 +521,8 @@ main {
 }
 
 /* Primary Image */
-.image img, .image-alt img {
+.image img,
+.image-alt img {
   max-height: 400px;
   width: auto;
   border-radius: 5px;
@@ -759,32 +761,33 @@ summary {
 
 /* Pitch overline */
 .pitch-item>span {
-    position: relative;
-    white-space: nowrap;
+  position: relative;
+  white-space: nowrap;
 }
 
 .pitch-line {
-    display: block;
-    position: absolute;
-    top: -0.1em;
-    left: 0;
-    right: 0;
-    border-width: 0.1em;
-    border-top-style: solid;
+  display: block;
+  position: absolute;
+  top: -0.1em;
+  left: 0;
+  right: 0;
+  border-width: 0.1em;
+  border-top-style: solid;
 }
 
 .pitch-low>.pitch-line {
-    border-top-style: none;
+  border-top-style: none;
 }
 
 .pitch-to-drop {
-    padding-right: 0.1em;
-    margin-right: 0.1em;
-    &>.pitch-line {
-        height: 0.4em;
-        right: -0.1em;
-        border-right-style: solid;
-    }
+  padding-right: 0.1em;
+  margin-right: 0.1em;
+
+  &>.pitch-line {
+    height: 0.4em;
+    right: -0.1em;
+    border-right-style: solid;
+  }
 }
 
 /* Pitch coloring */
@@ -812,23 +815,23 @@ summary {
 ul[data-sc-content="glossary"],
 [data-sc-content="forms"] ul,
 .yomitan-glossary [data-dictionary^="JMdict"] ul:not([data-sc-content]) {
+  display: inline;
+  list-style: none;
+  padding-left: 0 !important;
+
+  &>li:not(:first-child)::before {
+    white-space: pre-wrap;
+    content: " | ";
     display: inline;
-    list-style: none;
-    padding-left: 0!important;
+  }
 
-    &>li:not(:first-child)::before {
-        white-space: pre-wrap;
-        content: " | ";
-        display: inline;
-    }
-
-    & > li {
-        display: inline;
-    }
+  &>li {
+    display: inline;
+  }
 }
 
-[data-sc-content="glossary"] ~ ul,
-[data-sc-content="glossary"] ~ div {
+[data-sc-content="glossary"]~ul,
+[data-sc-content="glossary"]~div {
   line-height: normal;
 }
 
@@ -868,80 +871,43 @@ span[data-sc-code] {
 }
 
 /* backwards compatibility code for JPMN definitions */
-li[data-details="JMdict (English)"] .dict-group__glossary > ul,
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"],
-li[data-details="JMdict"] .dict-group__glossary > ul,
+li[data-details="JMdict (English)"] .dict-group__glossary>ul,
+li[data-details="JMdict (English)"] .dict-group__glossary ul[data-sc-content="glossary"],
+li[data-details="JMdict"] .dict-group__glossary>ul,
 li[data-details="JMdict"] .dict-group__glossary ul[data-sc-content="glossary"],
-li[data-details="JMdict Extra"] .dict-group__glossary > ul,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"] {
+li[data-details="JMdict Extra"] .dict-group__glossary>ul,
+li[data-details="JMdict Extra"] .dict-group__glossary ul[data-sc-content="glossary"] {
   display: inline;
   padding-left: 0em;
 }
 
-li[data-details="JMdict (English)"] .dict-group__glossary > ul > li,
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li,
-li[data-details="JMdict"] .dict-group__glossary > ul > li,
-li[data-details="JMdict"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li,
-li[data-details="JMdict Extra"] .dict-group__glossary > ul > li,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li {
+li[data-details="JMdict (English)"] .dict-group__glossary>ul>li,
+li[data-details="JMdict (English)"] .dict-group__glossary ul[data-sc-content="glossary"]>li,
+li[data-details="JMdict"] .dict-group__glossary>ul>li,
+li[data-details="JMdict"] .dict-group__glossary ul[data-sc-content="glossary"]>li,
+li[data-details="JMdict Extra"] .dict-group__glossary>ul>li,
+li[data-details="JMdict Extra"] .dict-group__glossary ul[data-sc-content="glossary"]>li {
   display: inline;
   padding-right: 0em;
   margin-right: 0em;
 }
 
-li[data-details="JMdict (English)"] .dict-group__glossary > ul > li::after,
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li::after,
-li[data-details="JMdict"] .dict-group__glossary > ul > li::after,
-li[data-details="JMdict"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li::after,
-li[data-details="JMdict Extra"] .dict-group__glossary > ul > li::after,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li::after {
+li[data-details="JMdict (English)"] .dict-group__glossary>ul>li::after,
+li[data-details="JMdict (English)"] .dict-group__glossary ul[data-sc-content="glossary"]>li::after,
+li[data-details="JMdict"] .dict-group__glossary>ul>li::after,
+li[data-details="JMdict"] .dict-group__glossary ul[data-sc-content="glossary"]>li::after,
+li[data-details="JMdict Extra"] .dict-group__glossary>ul>li::after,
+li[data-details="JMdict Extra"] .dict-group__glossary ul[data-sc-content="glossary"]>li::after {
   content: " | ";
   white-space: pre-wrap;
 }
 
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  > ul
-  > li:last-of-type:after,
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li:last-of-type:after,
-li[data-details="JMdict"] .dict-group__glossary > ul > li:last-of-type:after,
-li[data-details="JMdict"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li:last-of-type:after,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  > ul
-  > li:last-of-type:after,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li:last-of-type:after {
+li[data-details="JMdict (English)"] .dict-group__glossary>ul>li:last-of-type:after,
+li[data-details="JMdict (English)"] .dict-group__glossary ul[data-sc-content="glossary"]>li:last-of-type:after,
+li[data-details="JMdict"] .dict-group__glossary>ul>li:last-of-type:after,
+li[data-details="JMdict"] .dict-group__glossary ul[data-sc-content="glossary"]>li:last-of-type:after,
+li[data-details="JMdict Extra"] .dict-group__glossary>ul>li:last-of-type:after,
+li[data-details="JMdict Extra"] .dict-group__glossary ul[data-sc-content="glossary"]>li:last-of-type:after {
   display: none;
 }
 
@@ -956,15 +922,9 @@ ol li[data-details="JMdict Extra"] .dict-group__tag-list {
 }
 
 /* removes the dictionary entry for jmdict */
-ol
-  li[data-details="JMdict (English)"]
-  .dict-group__tag-list
-  .dict-group__tag--dict,
+ol li[data-details="JMdict (English)"] .dict-group__tag-list .dict-group__tag--dict,
 ol li[data-details="JMdict"] .dict-group__tag-list .dict-group__tag--dict,
-ol
-  li[data-details="JMdict Extra"]
-  .dict-group__tag-list
-  .dict-group__tag--dict {
+ol li[data-details="JMdict Extra"] .dict-group__tag-list .dict-group__tag--dict {
   display: none;
 }
 
@@ -974,11 +934,7 @@ ol li[data-details="Nico/Pixiv"] .dict-group__tag-list {
 }
 
 /* Removes the extra text for the collapsed 新和英 display */
-ol
-  li[data-details="新和英"]
-  details.glossary-text__details
-  .glossary-text__summary
-  .dict-group__glossary--first-line {
+ol li[data-details="新和英"] details.glossary-text__details .glossary-text__summary .dict-group__glossary--first-line {
   display: none;
 }
 
@@ -1017,8 +973,7 @@ li[data-dictionary="明鏡国語辞典 第三版"] span {
   vertical-align: bottom !important;
 }
 
-li[data-dictionary="明鏡国語辞典 第三版"]
-  div:has(> span[data-sc-class="品格"]) {
+li[data-dictionary="明鏡国語辞典 第三版"] div:has(> span[data-sc-class="品格"]) {
   margin-bottom: 5px !important;
 }
 
@@ -1030,12 +985,12 @@ li[data-dictionary="明鏡国語辞典 第三版"] [data-sc-body] {
 li[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-body] {
   line-height: 1.4em;
 }
+
 [data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-rectr][data-sc-fill] {
   color: #f5f5f5 !important;
 }
-.nightMode
-  [data-dictionary="三省堂 全訳読解古語辞典"]
-  span[data-sc-rectr][data-sc-fill] {
+
+.nightMode [data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-rectr][data-sc-fill] {
   color: #1e1e1e !important;
 }
 
@@ -1044,24 +999,27 @@ li[data-dictionary="旺文社 全訳古語辞典"] [data-sc-audio_play_button],
 li[data-dictionary="旺文社 全訳古語辞典"] [data-sc-audio_stop_button] {
   display: none !important;
 }
+
 li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc用例囲み-g],
 li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc和歌俳句囲み-g],
 li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc冒頭文囲み-g],
 li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc小倉囲み-g] {
   margin-top: 0 !important;
 }
+
 [data-dictionary="旺文社 全訳古語辞典"] span[data-sc-rectr][data-sc-fill] {
   color: #f5f5f5 !important;
 }
-.nightMode
-  [data-dictionary="旺文社 全訳古語辞典"]
-  span[data-sc-rectr][data-sc-fill] {
+
+.nightMode [data-dictionary="旺文社 全訳古語辞典"] span[data-sc-rectr][data-sc-fill] {
   color: #1e1e1e !important;
 }
 
 /* Default Layouts */
-html.mobile .sentence, html:not(.mobile) .sentence-alt,
-.audio-buttons-alt, .image-alt {
+html.mobile .sentence,
+html:not(.mobile) .sentence-alt,
+.audio-buttons-alt,
+.image-alt {
   display: none;
 }
 
@@ -1118,6 +1076,7 @@ html.mobile .sentence, html:not(.mobile) .sentence-alt,
 }
 
 #lapis[data-glossary-separator="on"] .definition {
+
   & li[data-dictionary]:not(:last-of-type),
   & li[data-details]:not(:last-of-type) {
     border-bottom: 1px dashed var(--fg-subtle);
@@ -1137,10 +1096,12 @@ html.mobile .sentence, html:not(.mobile) .sentence-alt,
   & [data-sc-code] {
     display: none;
   }
+
   & ul {
     padding-inline-start: 0px;
     margin-block: 0px;
-    & > li::marker {
+
+    &>li::marker {
       content: "";
     }
   }
