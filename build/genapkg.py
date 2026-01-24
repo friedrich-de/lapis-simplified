@@ -1,24 +1,31 @@
 import genanki
 import yaml
 import sys
+import csv
+from pathlib import Path
 
 if len(sys.argv) < 2:
-    print("Usage: python build_anki_deck.py <output_file>")
+    print("Usage: python genapkg.py <output_file>")
     sys.exit(1)
 
 SIMPLIFIED_LAPIS_TEMPLATE_ID = 1667218449923
 SIMPLIFIED_LAPIS_DECK_ID = 1759068131727
 
-with open("../src/front.html", "r") as front_file:
+script_dir = Path(__file__).resolve().parent
+repo_root = script_dir.parent
+src_dir = repo_root / "src"
+build_dir = script_dir
+
+with open(src_dir / "front.html", "r", encoding="utf-8") as front_file:
     front_content = front_file.read()
 
-with open("../src/back.html", "r") as back_file:
+with open(src_dir / "back.html", "r", encoding="utf-8") as back_file:
     back_content = back_file.read()
 
-with open("../src/styling.css", "r") as css_file:
+with open(src_dir / "styling.css", "r", encoding="utf-8") as css_file:
     css_content = css_file.read()
 
-with open("anki_fields.yaml", "r", encoding="utf-8") as fields_file:
+with open(build_dir / "anki_fields.yaml", "r", encoding="utf-8") as fields_file:
     anki_fields = yaml.safe_load(fields_file)
 
 lapis = genanki.Model(
@@ -37,20 +44,40 @@ lapis = genanki.Model(
 
 deck = genanki.Deck(SIMPLIFIED_LAPIS_DECK_ID, "Lapis Simplified")
 
-with open("example_card.csv", "r") as f:
-    for line in f:
-        fields_content = line.strip().split("\t")
-        deck.add_note(
-            genanki.Note(
-                model=lapis, fields=fields_content, tags=["アニメ::小市民シリーズ"]
+cards_file = build_dir / "example_cards.csv"
+if not cards_file.exists():
+    raise FileNotFoundError(
+        f"Cards file not found: {cards_file}. Expected TSV (tab-separated) rows with "
+        f"{len(anki_fields)} fields + optional trailing tag."
+    )
+
+expected_field_count = len(anki_fields)
+
+with open(cards_file, "r", encoding="utf-8", newline="") as f:
+    reader = csv.reader(f, delimiter="\t")
+    for row_index, row in enumerate(reader, start=1):
+        if not row or all(not cell.strip() for cell in row):
+            continue
+
+        tag_str = ""
+        fields_content = row
+        if len(row) == expected_field_count + 1:
+            fields_content = row[:-1]
+            tag_str = row[-1].strip()
+        elif len(row) != expected_field_count:
+            raise ValueError(
+                f"Row {row_index} has {len(row)} values; expected {expected_field_count} "
+                f"or {expected_field_count + 1} (including tag)."
             )
-        )
+
+        tags = tag_str.replace(",", " ").split() if tag_str else []
+        deck.add_note(genanki.Note(
+            model=lapis, fields=fields_content, tags=tags))
 
 package = genanki.Package(deck)
-package.media_files = [
-    "media_files/yomitan_audio_2024-07-20-15-08-08-382.ogg",
-    "media_files/shoushiminseries04_08m44s853ms_08m47s653ms.ogg",
-    "media_files/shoushiminseries04_08m46s485ms.webp",
-    "media_files/yomitan_dictionary_media_1_2024-07-20-15-08-08-382.svg",
-]
+media_dir = build_dir / "media_files"
+if media_dir.exists():
+    package.media_files = [str(p) for p in sorted(
+        media_dir.iterdir()) if p.is_file()]
+
 package.write_to_file(sys.argv[1])
