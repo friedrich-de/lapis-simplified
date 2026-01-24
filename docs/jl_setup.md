@@ -17,18 +17,9 @@ Set up your fields according to the following table:
 | SentenceAudio         | `Nothing`                                  |
 | Picture               | `Image`                                    |
 | Glossary              | `Nothing`                                  |
-| Hint                  | `Nothing`                                  |
-| IsWordAdnSentenceCard | `Nothing`                                  |
-| IsClickCard           | `Nothing`                                  |
-| IsSentenceCard        | `Nothing`                                  |
-| IsAudioCard           | `Nothing`                                  |
 | PitchPosition         | `Pitch Accent for First Reading (Numeric)` |
 | Frequency             | `Frequencies`                              |
 | FreqSort              | `Frequency (Harmonic Mean)`                |
-
-## AJT Configuration
-
-To set up the Sentence Furigana, please see [AJT Japanese Setup](anki_setup.md).
 
 ## Limitations
 
