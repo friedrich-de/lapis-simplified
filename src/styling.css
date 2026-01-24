@@ -39,8 +39,8 @@
 
   /* For an overview of these variables
   See https://github.com/donkuri/lapis/tree/main/docs/user_settings.md */
-  --main-picture-position: "right"; /* "right", "left", "alt" */
-  --sentence-position: "above"; /* "above", "below" the definition box*/
+  --main-picture-position: "alt"; /* "right", "left", "alt" */
+  --sentence-position: "below"; /* "above", "below" the definition box*/
   --audio-buttons: "alt"; /* "header", "fixed", "alt" */
   --nsfw-blur-contained: "off"; /* "on", "off" */
   --open-misc-info: "off"; /* "on", "off" */
@@ -48,7 +48,7 @@
   --jitendex-format: "no-tags"; /* "minimal" or space-separated list of "no-tags", "no-sentence", "no-forms", "no-xref", "no-img" */
   --img-ignore-display-scaling:  "off"; /* Modal images ignore display scaling */
 
-  --mobile-main-picture-position: "right"; /* "left", "right", "alt" */
+  --mobile-main-picture-position: "alt"; /* "left", "right", "alt" */
   --mobile-sentence-position: "below";
   --mobile-audio-buttons: "fixed"; /* "fixed", "header", "alt" */
 
