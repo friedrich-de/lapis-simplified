@@ -25,14 +25,6 @@
   font: Hiragino Sans Pr6N
 - name: Hint
   font: Hiragino Sans Pr6N
-- name: IsWordAndSentenceCard
-  font: Hiragino Sans Pr6N
-- name: IsClickCard
-  font: Hiragino Sans Pr6N
-- name: IsSentenceCard
-  font: Hiragino Sans Pr6N
-- name: IsAudioCard
-  font: Hiragino Sans Pr6N
 - name: PitchPosition
   font: Hiragino Sans Pr6N
 - name: PitchCategories
