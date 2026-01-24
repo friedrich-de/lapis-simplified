@@ -9,13 +9,11 @@ Set up your fields according to the following table:
 | Field                 | Value                                      |
 |-----------------------|--------------------------------------------|
 | Expression            | `Primary Spelling`                         |
-| ExpressionFurigana    | `Primary Spelling and First Reading`       |
 | ExpressionReading     | `First Reading`                            |
 | ExpressionAudio       | `Audio`                                    |
 | SelectionText         | `Selected Definitions`                     |
 | MainDefinition        | `Definitions`                              |
 | Sentence              | `Sentence`                                 |
-| SentenceFurigana      | `Nothing`                                  |
 | SentenceAudio         | `Nothing`                                  |
 | Picture               | `Image`                                    |
 | Glossary              | `Nothing`                                  |
