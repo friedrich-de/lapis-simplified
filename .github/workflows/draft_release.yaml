@@ -29,20 +29,20 @@ jobs:
           pip install -r requirements.txt
 
       - name: Generate Anki Deck
-        run: python genapkg.py "Lapis-${{ github.event.inputs.version }}.apkg"
+        run: python genapkg.py "Lapis-Simplified-${{ github.event.inputs.version }}.apkg"
 
       - name: Create Draft Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.version }}
-          name: "Lapis ${{ github.event.inputs.version }}"
-          files: "build/Lapis-${{ github.event.inputs.version }}.apkg"
+          name: "Lapis Simplified ${{ github.event.inputs.version }}"
+          files: "build/Lapis-Simplified-${{ github.event.inputs.version }}.apkg"
           draft: true 
           body: |
-            ## How to update Lapis
+            ## How to update Lapis Simplified
             1. Backup your custom settings from the note's styling
             2. Updating the template:
             2a. Import the apkg inside Anki with the following options: <img src="https://github.com/${{ github.repository }}/blob/main/assets/import_options.png" alt="import options">
-            2b. Alternatively, you can manually update your Lapis card by selecting a card, clicking Cards..., and copying the contents of front.html, back.html, and styling.css accordingly. Then, click Save to apply the changes.
+            2b. Alternatively, you can manually update your Lapis Simplified card by selecting a card, clicking Cards..., and copying the contents of front.html, back.html, and styling.css accordingly. Then, click Save to apply the changes.
             3. Copy your settings back in the note's styling
