@@ -24,15 +24,13 @@
         <div class="def-header">
             <div class="dh-vocab">
                 <div class="vocab">
-                    {{#ExpressionFurigana}}{{furigana:ExpressionFurigana}}{{/ExpressionFurigana}}
-                    {{^ExpressionFurigana}}{{Expression}}{{/ExpressionFurigana}}
+                    {{Expression}}
                 </div>
 
                 <!-- Reading + Pitch Accent -->
                 <div class="info">
                     <div class="pitch">
-                        {{#ExpressionFurigana}}{{kana:ExpressionFurigana}}{{/ExpressionFurigana}}
-                        {{^ExpressionFurigana}}{{ExpressionReading}}{{/ExpressionFurigana}}
+                        {{ExpressionReading}}
                     </div>
 
                     <!-- Pitch Accent -->
@@ -149,7 +147,7 @@
     }
 
     function handlePitches() {
-        const exprKana = `{{kana:ExpressionFurigana}}` || `{{ExpressionReading}}`;
+        const exprKana = `{{ExpressionReading}}` || `{{Expression}}`;
         const isYomitan = document.querySelector("#glossaries .yomitan-glossary");
 
         // Dirty single katakana to hiragana conversion
@@ -260,7 +258,7 @@
     }
 
     function constructPitch(pitchPatterns) {
-        const kana = `{{kana:ExpressionFurigana}}` || `{{ExpressionReading}}`;
+        const kana = `{{ExpressionReading}}` || `{{Expression}}`;
         const morae = groupMoras(kana);
         const pitch = document.querySelector(".pitch");
         const pitchTags = document.querySelector("#pitch-tags");
