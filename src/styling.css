@@ -42,11 +42,10 @@
   --main-picture-position: "right"; /* "right", "left", "alt" */
   --sentence-position: "above"; /* "above", "below" the definition box*/
   --audio-buttons: "alt"; /* "header", "fixed", "alt" */
-  --sentence-furigana: "hover"; /* "hover", "always", "off" */
   --nsfw-blur-contained: "off"; /* "on", "off" */
   --open-misc-info: "off"; /* "on", "off" */
   --glossary-separator: "off"; /* "on" to separate dictionaries in definition box */
-  --jitendex-format: "minimal"; /* "minimal" or space-separated list of "no-tags", "no-sentence", "no-forms", "no-xref", "no-img" */
+  --jitendex-format: "no-tags"; /* "minimal" or space-separated list of "no-tags", "no-sentence", "no-forms", "no-xref", "no-img" */
 
   --mobile-main-picture-position: "right"; /* "left", "right", "alt" */
   --mobile-sentence-position: "below";
@@ -738,11 +737,6 @@ footer {
 
 /* ----- Misc ----- */
 
-/* Furigana */
-ruby rt {
-  user-select: none;
-}
-
 /* Bold */
 b {
   color: var(--bold);
@@ -1075,16 +1069,6 @@ html:not(.mobile) .sentence-alt,
 }
 
 /* Other Settings */
-#lapis[data-sentence-furigana="always"] .sentence rt,
-#lapis[data-sentence-furigana="always"] .sentence-alt rt {
-  visibility: visible;
-}
-
-#lapis[data-sentence-furigana="off"] .sentence rt,
-#lapis[data-sentence-furigana="off"] .sentence-alt rt {
-  display: none;
-}
-
 #lapis[data-nsfw-blur-contained="on"] .NSFW,
 #lapis[data-nsfw-blur-contained="on"] .nsfw,
 #lapis[data-nsfw-blur-contained="on"] .Nsfw {

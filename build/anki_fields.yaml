@@ -16,9 +16,6 @@
 - name: Sentence
   font: Hiragino Sans Pr6N
   size: 20
-- name: SentenceFurigana
-  font: Hiragino Sans Pr6N
-  size: 20
 - name: SentenceAudio
   font: Hiragino Sans Pr6N
   size: 10
