@@ -282,27 +282,10 @@ html.ipad #lapis {
   line-height: 1.5;
 }
 
-.front-sentence {
-  font-size: var(--sentence-font-size);
-  display: inline-block;
-  line-height: 1.5;
-}
-
 #hint {
   font-size: var(--hint-font-size);
   margin-top: -5px;
   line-height: 1.5;
-}
-
-#click {
-  user-select: none;
-}
-
-#click .front-vocab {
-  display: inline-block;
-  line-height: 1.2;
-  margin-bottom: 20px;
-  border-bottom: 2px dotted var(--fg-subtle);
 }
 
 /* ----- Back elements ----- */
