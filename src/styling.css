@@ -46,6 +46,7 @@
   --open-misc-info: "off"; /* "on", "off" */
   --glossary-separator: "off"; /* "on" to separate dictionaries in definition box */
   --jitendex-format: "no-tags"; /* "minimal" or space-separated list of "no-tags", "no-sentence", "no-forms", "no-xref", "no-img" */
+  --img-ignore-display-scaling: "off"; /* Modal images ignore display scaling */
 
   --mobile-main-picture-position: "alt"; /* "left", "right", "alt" */
   --mobile-sentence-position: "below";
@@ -127,18 +128,22 @@
   --skogo-gendai-mark: #cccccc;
 }
 
-.android .nightMode {
+/* Ankidroid old review screen does not set data-bs-theme*/
+.android:not([data-bs-theme]) .nightMode {
   --bg-color: black;
   --fg-color: white;
 }
 
-.android .nightMode:not(.ankidroid_dark_mode) {
-  /* make it brighter since bg is black */
-  --bg-elevated: rgba(255, 255, 255, 0.06);
-}
-
+/* Ankidroid old review screen dark theme */
 .android .nightMode.ankidroid_dark_mode {
   --bg-color: #303030;
+}
+
+/* Ankidroid black theme */
+.android:not([data-bs-theme]) .nightMode:not(.ankidroid_dark_mode),
+.android[data-bs-theme="black"] .card {
+  /* make it brighter since bg is black */
+  --bg-elevated: rgba(255, 255, 255, 0.06);
 }
 
 .card:not(.nightMode) {
@@ -541,54 +546,29 @@ main {
   margin: 0;
 }
 
-/* Image modal css */
-.modal-bg {
+/* Image modal */
+#modal {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0px;
   background-color: rgba(0, 0, 0, 0.8);
+  padding: 2.5vw;
   z-index: 1000;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
-}
-
-.modal-bg.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.img-popup-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(calc(100% - 20px), calc(var(--max-width) + 200px));
-  z-index: 1001;
-  overflow: hidden;
   display: flex;
   opacity: 0;
   visibility: hidden;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(3px) drop-shadow(0px 10px var(--bg-color));
   transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
+    opacity 0.3s,
+    visibility 0s 0.3s;
 }
 
-.img-popup-container.active {
+#modal.active {
   opacity: 1;
   visibility: visible;
-}
-
-.img-popup-img {
-  width: auto;
-  height: auto;
-  margin: 0 auto;
-  transition: transform 0.3s ease;
+  transition-delay: 0s;
 }
 
 /* Hide NFSW Images -- make sure you use the tag `NSFW` EXACTLY */

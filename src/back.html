@@ -81,11 +81,6 @@
             <div class="audio-buttons-alt"></div>
         </div>
 
-        <!------- Image modal --------->
-        <div class="modal-bg tappable">
-            <div class="img-popup"></div>
-        </div>
-
         {{#MiscInfo}}
         <details>
             <summary>Misc. info</summary>
@@ -110,6 +105,9 @@
         </div>
     </footer>
 </div>
+
+<!------- Image modal --------->
+<div id="modal" class="tappable"></div>
 
 <!----------- Scripts ------------>
 <script>
@@ -145,7 +143,8 @@
     }
 
     function handlePitches() {
-        const exprKana = `{{ExpressionReading}}` || `{{Expression}}`;
+        let exprKana = `{{ExpressionReading}}` || `{{Expression}}`;
+        exprKana = exprKana.trim();
         const isYomitan = document.querySelector("#glossaries .yomitan-glossary");
 
         // Dirty single katakana to hiragana conversion
@@ -204,7 +203,7 @@
         pitches = pitches.filter(pitch => pitch !== null);
         if (pitches.length < 1) return;
         if(!Array.isArray(pitches[0])) paintTargetWord(getPitchType(exprKana, pitches[0]));
-        constructPitch(new Set(pitches));
+        constructPitch(exprKana, new Set(pitches));
     }
 
     // Show the color
@@ -255,8 +254,7 @@
         return groupedMoras;
     }
 
-    function constructPitch(pitchPatterns) {
-        const kana = `{{ExpressionReading}}` || `{{Expression}}`;
+    function constructPitch(kana, pitchPatterns) {
         const morae = groupMoras(kana);
         const pitch = document.querySelector(".pitch");
         const pitchTags = document.querySelector("#pitch-tags");
@@ -436,63 +434,29 @@
         document.head.classList.add("has-listener");
     }
 
-    // Image lightbox with fade transition similar to JPMN
     function clickImages() {
-        const modalBg = document.querySelector(".modal-bg");
-        const imgPopup = document.querySelector(".img-popup");
+        const modal = document.getElementById("modal");
         let images = Array.from(document.querySelectorAll(".image img, .image-alt img, .def-image img"));
         /* Disable image links that were opening in a browser window */
         const glossImageLinks = document.querySelectorAll(".definition a:has(img)");
         glossImageLinks.forEach(link => link.href = "");
 
-        images = [... images, ... glossImageLinks];
-        if(images.length < 1) return;
-        for (let image of images) {
+        // Add listeners to images
+        for (let image of [...images, ...glossImageLinks]) {
             image.addEventListener("click", () => {
-                const imgPopupContainer = document.createElement("div");
-                const imgPopupImg = document.createElement("img");
-
-                imgPopupContainer.classList.add("img-popup-container");
-                imgPopupImg.src = image.src || image.querySelector("img").src;
-                imgPopupImg.classList.add("img-popup-img");
-
-                if (image.height > image.width) {
-                    imgPopupContainer.style.height = "calc(100% - 20px)";
-                    imgPopupContainer.style.width = "max-content";
+                const imgElement = document.createElement("img");
+                imgElement.src = image.src || image.querySelector("img").src;
+                const scaling = window.devicePixelRatio;
+                if (scaling !== 1 && lapis.dataset.imgIgnoreDisplayScaling === "on") {
+                    imgElement.style.maxHeight = `min(${image.naturalHeight / scaling}px, 100%)`;
+                    imgElement.style.maxWidth = `min(${image.naturalWidth / scaling}px, 100%)`;
                 }
-
-                imgPopup.innerHTML = "";
-                imgPopup.appendChild(imgPopupContainer);
-                imgPopupContainer.appendChild(imgPopupImg);
-
-                // Force a reflow before adding active classes to ensure transitions work
-                void modalBg.offsetWidth;
-
-                // Show the modal background with fade transition
-                modalBg.style.display = "block";
-
-                // Force another reflow to ensure the display change takes effect before transition
-                void modalBg.offsetWidth;
-
-                modalBg.classList.add("active");
-                imgPopupContainer.classList.add("active");
-                document.body.classList.add("img-popup");
+                modal.replaceChildren(imgElement);
+                modal.classList.add("active");
             });
         }
 
-        modalBg.addEventListener("click", () => {
-            // Removes active classes to trigger fade-out transition
-            modalBg.classList.remove("active");
-            const activeContainer = document.querySelector(".img-popup-container.active");
-            if (activeContainer) {
-                activeContainer.classList.remove("active");
-            }
-            setTimeout(() => {
-                document.body.classList.remove("img-popup");
-                modalBg.style.display = "none";
-                imgPopup.innerHTML = "";
-            }, 300);
-        });
+        modal.addEventListener("click", () => modal.classList.remove("active"));
     }
 
     // Format plaintext comma-separated frequencies into a list
@@ -564,11 +528,12 @@
             "--nsfw-blur-contained",
             "--open-misc-info",
             "--glossary-separator",
-            "--jitendex-format"
+            "--jitendex-format",
+            "--img-ignore-display-scaling",
         ];
         for (const opt of options) {
             let value = styles.getPropertyValue(opt);
-            value = value.replace(/^['"]|['"]$/g,"").trim().toLowerCase();
+            value = value.trim().replace(/^['"]|['"]$/g,"").toLowerCase();
             lapis.setAttribute("data-" + opt.slice(2), value);
             if (opt === "--open-misc-info" && value === "on" && miscInfo) {
                 miscInfo.open = true;
